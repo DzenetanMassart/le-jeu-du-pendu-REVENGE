@@ -1,0 +1,44 @@
+@keyframes aec {
+    from {
+        filter: hue-rotate(0deg)
+    }
+    to {
+        filter: hue-rotate(360deg)
+    }
+}
+
+.lettre {
+    display: inline-block;
+    font-family: 'Lilita One', cursive;
+    text-align: center;
+    border: blue 5px solid;
+    margin: 0;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    &:hover {
+        border: rgb(37, 37, 141) 5px solid;
+    }
+}
+
+h1 {
+    font-family: 'Lilita One', cursive;
+    text-align: center;
+    border: blue 5px solid;
+    margin: 0;
+    background: -webkit-linear-gradient(rgb(31, 31, 104), rgb(7, 130, 245));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.jeu {
+    text-align: center;
+    div {
+        margin: 5px;
+    }
+}
+
+.arc_en_ciel {
+    animation: aec 2s;
+}
