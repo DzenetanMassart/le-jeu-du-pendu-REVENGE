@@ -93,7 +93,6 @@
                     }
 
                     /* visu lettre cochée */
-                    document.getElementById('clavier').innerHTML += ' <span class="lettreCOCHED" id="' + alphabet[a] + '">' + alphabet[a] + '</a> ';
 
 
                 }
