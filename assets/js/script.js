@@ -92,7 +92,7 @@
                         }
                     }
 
-                    /* coloration des lettres déjà cliquées */
+                    /* visu lettre cochée */
                     document.getElementById(lettre).style.color = "red";
                     document.getElementById(lettre).style.height = "75px";
 
@@ -116,12 +116,6 @@
                     mot = demarre();
                     tab_mot = tableau_mot(mot);
                     tab_mot_decouvert = tableau_mot_decouvert(mot);
-                    for (a = 0; a < alphabet.length; a++) {
-
-                        // décoloration du clavier
-                        document.getElementById(alphabet[a]).style.backgroundColor = "#dddddd";
-                        document.getElementById(alphabet[a]).style.color = "#000000";
-                    }
                 }
 
                 if (essais >= 10 || essais > 10) {
