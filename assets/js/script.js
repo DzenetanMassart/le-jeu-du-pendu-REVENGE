@@ -77,7 +77,7 @@
             document.getElementById(lettre).onmousedown = function() {
 
                 lettre = this.id;
-                let trouve = "";
+                let trouve = 0;
                 for (i = 0; i < mot.length; i++) {
 
                     if (tab_mot[i] == lettre) {
@@ -88,18 +88,18 @@
 
                             document.getElementById('mot').innerHTML += " " + tab_mot_decouvert[k] + " ";
                             document.getElementById('bravo').innerHTML = '<p>Oui, il y a un "' + lettre + '" ' + 'dans le mot !</p>';
-                            let trouve = "oui";
+                            trouve = 1;
                         }
                     }
 
                     /* visu lettre cochée */
-                    document.getElementById(lettre).style.color = "red";
-                    document.getElementById(lettre).style.height = "75px";
+                    document.getElementById('clavier').innerHTML += ' <span class="lettreCOCHED" id="' + alphabet[a] + '">' + alphabet[a] + '</a> ';
+
 
                 }
-                if (essais < 10) {
+                if (essais < 9) {
 
-                    if (trouve == "") {
+                    if (trouve === 0) {
 
                         //si la lettre n'est pas dans le mot
                         essais++;
@@ -109,20 +109,20 @@
                 }
 
                 if (tab_mot_decouvert.indexOf("_") == -1) {
-
+                    essais += 10;
+                    document.getElementById('clavier').innerHTML += ' <span class="lettre" id="' + alphabet[a] + '">' + alphabet[a] + '</a> ';
                     score++;
-                    document.getElementById('bravo').innerHTML = '<p class="arc_en_ciel">Bravo, tu as trouvé le mot "' + mot + '" !</p>';
+                    document.getElementById('bravo').innerHTML = '<p class="arc_en_ciel">Bravo, tu as trouvé le mot "' + mot + '" ! =D </p>';
                     document.getElementById('mot').innerHTML = "";
                     mot = demarre();
                     tab_mot = tableau_mot(mot);
                     tab_mot_decouvert = tableau_mot_decouvert(mot);
+                    demarre();
                 }
 
-                if (essais >= 10 || essais > 10) {
-
+                if (essais >= 9) {
                     document.getElementById('mot').innerHTML = mot;
-                    document.getElementById('bravo').innerHTML = "<p>PERDU ! C'EST TERMINER !</p><p><a href='index.html'>Rejouer ?</a></p>";
-                    document.getElementById('bravo').style.backgroundColor = "#ffeedd";
+                    document.getElementById('bravo').innerHTML = '<p class="loose">PERDU ! C\'EST TERMINER !</p><p><a href="index.html">Rejouer ?</a></p>';
                 }
             }
         }

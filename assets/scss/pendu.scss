@@ -1,9 +1,9 @@
 @keyframes aec {
     from {
-        filter: hue-rotate(0deg)
+        color: blue;
     }
     to {
-        filter: hue-rotate(360deg)
+        color: red;
     }
 }
 
@@ -16,8 +16,10 @@
     font-size: 25px;
     width: 50px;
     height: 50px;
+    transition: all 0.2s;
     &:hover {
         border: rgb(37, 37, 141) 5px solid;
+        transform: rotateX(50deg);
     }
 }
 
@@ -40,5 +42,9 @@ h1 {
 }
 
 .arc_en_ciel {
-    animation: aec 2s;
+    animation: aec 0.5s infinite;
+}
+
+.loose {
+    animation: aec 0.5s infinite;
 }
