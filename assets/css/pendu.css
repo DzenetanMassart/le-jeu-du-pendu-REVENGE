@@ -8,6 +8,8 @@
 
 .lettre:hover { border: #25258d 5px solid; -webkit-transform: rotateX(50deg); transform: rotateX(50deg); }
 
+.lettre:hover:active { color: red; }
+
 h1 { font-family: 'Lilita One', cursive; text-align: center; border: blue 5px solid; margin: 0; background: -webkit-linear-gradient(#1f1f68, #0782f5); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
 .jeu { text-align: center; }

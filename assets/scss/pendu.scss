@@ -20,6 +20,9 @@
     &:hover {
         border: rgb(37, 37, 141) 5px solid;
         transform: rotateX(50deg);
+        &:active {
+            color: red;
+        }
     }
 }
 

@@ -1,4 +1,5 @@
     let score = 0;
+    let erreurs = [];
 
     document.getElementById("demarre").addEventListener("click", demarre);
 
@@ -21,35 +22,35 @@
         function tableau_mot(mot) {
 
             /* on fait un tableau avec les lettres du mot */
-            let tab_mot = [];
+            let mots = [];
             for (i = 0; i < mot.length; i++) {
-                tab_mot[i] = mot.substr(i, 1);
+                mots[i] = mot.substr(i, 1);
             }
 
-            return tab_mot;
+            return mots;
         }
-        tab_mot = tableau_mot(mot);
+        mots = tableau_mot(mot);
 
         function tableau_mot_decouvert(mot) {
 
             /* on fait un nouveau tableau avec des _ à la place de chaque lettre. On changera la valeur à chaque lettre découverte. */
-            let tab_mot_decouvert = [];
+            let mots_decouvert = [];
             for (i = 0; i < mot.length; i++) {
 
-                tab_mot_decouvert[i] = "_";
+                mots_decouvert[i] = "_";
 
             }
 
             /* affichage du mot */
             for (i = 0; i < mot.length; i++) {
 
-                document.getElementById('mot').innerHTML += " " + tab_mot_decouvert[i] + " ";
+                document.getElementById('mot').innerHTML += " " + mots_decouvert[i] + " ";
 
             }
 
-            return tab_mot_decouvert;
+            return mots_decouvert;
         }
-        tab_mot_decouvert = tableau_mot_decouvert(mot);
+        mots_decouvert = tableau_mot_decouvert(mot);
 
         /* affichage du clavier */
         for (a = 0; a < alphabet.length; a++) {
@@ -80,47 +81,48 @@
                 let trouve = 0;
                 for (i = 0; i < mot.length; i++) {
 
-                    if (tab_mot[i] == lettre) {
+                    if (mots[i] == lettre) {
 
-                        tab_mot_decouvert[i] = lettre;
+                        mots_decouvert[i] = lettre;
                         document.getElementById('mot').innerHTML = "";
                         for (k = 0; k < mot.length; k++) {
 
-                            document.getElementById('mot').innerHTML += " " + tab_mot_decouvert[k] + " ";
+                            document.getElementById('mot').innerHTML += " " + mots_decouvert[k] + " ";
                             document.getElementById('bravo').innerHTML = '<p>Oui, il y a un "' + lettre + '" ' + 'dans le mot !</p>';
                             trouve = 1;
                         }
                     }
 
-                    /* visu lettre cochée */
-
-
                 }
                 if (essais < 9) {
 
                     if (trouve === 0) {
-
-                        //si la lettre n'est pas dans le mot
-                        essais++;
-                        document.getElementById('bravo').innerHTML = '<p>Non, pas de "' + lettre + '" dans le mot.</p><p> Tu as encore ' + (10 - essais) + ' essais.</p>';
+                        if (erreurs.indexOf(lettre) === -1) {
+                            essais++;
+                            erreurs.push(lettre);
+                            document.getElementById('echecs').innerHTML += lettre + ',';
+                            document.getElementById('bravo').innerHTML = '<p>Non, pas de "' + lettre + '" dans le mot.</p><p> Tu as encore ' + (10 - essais) + ' essais.</p>';
+                        } else {
+                            document.getElementById('bravo').innerHTML = '<p>LA LETTRE "' + lettre + '" A DÉJÀ ÉTÉ UTILISÉE >:( .</p>';
+                        }
                         document.getElementById('p' + essais).style.display = "block";
                     }
                 }
 
-                if (tab_mot_decouvert.indexOf("_") == -1) {
-                    essais += 10;
-                    document.getElementById('clavier').innerHTML += ' <span class="lettre" id="' + alphabet[a] + '">' + alphabet[a] + '</a> ';
+                if (mots_decouvert.indexOf("_") == -1) {
                     score++;
                     document.getElementById('bravo').innerHTML = '<p class="arc_en_ciel">Bravo, tu as trouvé le mot "' + mot + '" ! =D </p>';
                     document.getElementById('mot').innerHTML = "";
                     mot = demarre();
-                    tab_mot = tableau_mot(mot);
-                    tab_mot_decouvert = tableau_mot_decouvert(mot);
+                    mots = tableau_mot(mot);
+                    mots_decouvert = tableau_mot_decouvert(mot);
                     demarre();
                 }
 
                 if (essais >= 9) {
-                    document.getElementById('mot').innerHTML = mot;
+                    document.getElementById('clavier').style.display = 'none';
+                    document.getElementById('echecs').style.display = 'none';
+
                     document.getElementById('bravo').innerHTML = '<p class="loose">PERDU ! C\'EST TERMINER !</p><p><a href="index.html">Rejouer ?</a></p>';
                 }
             }
